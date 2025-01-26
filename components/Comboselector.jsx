@@ -89,7 +89,7 @@ const Comboselector = ({ handlefunc, langu }) => {
                             <CommandGroup>
 
                                 {languages.map((lang) => (
-                                    <Link key={lang.value} href={`/language/${lang.value}`}>
+                                    <Link key={lang.value} href={`/language/${lang.label.toLowerCase()}`}>
                                         <CommandItem
                                             key={lang.value}
                                             onSelect={() => {
@@ -102,7 +102,7 @@ const Comboselector = ({ handlefunc, langu }) => {
                                                     }`}
                                             />
 
-                                            {lang.label}
+                                            {lang.label.split('-').join(' ')}
 
 
 
