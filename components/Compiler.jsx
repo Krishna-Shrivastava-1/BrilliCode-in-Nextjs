@@ -21,7 +21,7 @@ const Compiler = () => {
     const [jsCode, setJsCode] = useState("console.log('Hello, World!');");
     const [output, setOutput] = useState("");
     const [iframeSize, setIframeSize] = useState({ width: 500, height: 400 });
-
+    const [themi, setThemi] = useState('vs-dark'); 
     const [isact, setisact] = useState('HTML')
     useEffect(() => {
         updatePreview();
@@ -48,7 +48,13 @@ const Compiler = () => {
     const handleResize = (event, { size }) => {
         setIframeSize(size); // Update iframe size on resize
     };
-    const themi = localStorage.getItem('theme')
+    useEffect(() => {
+        // Ensure code runs only in the browser
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+          setThemi(storedTheme);
+        }
+      }, []);
     return (
         <div className="w-full flex items-center flex-col justify-center">
             <div className='sticky top-0 z-50 w-full'>

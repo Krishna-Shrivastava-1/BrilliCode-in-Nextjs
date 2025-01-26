@@ -81,7 +81,7 @@ export default function Contact() {
                         className="inpname outline-none border-none ml-2 mr-2 mb-3 text-lg w-full">
                         <input
                             className={`placeholder-zinc-600 bg-transparent resize-none rounded-lg w-full p-2 border ${username ? "border-purple-500" : "border-zinc-700"
-                                } outline-none text-white text-lg mt-3`}
+                                } outline-none dark:text-white text-lg mt-3`}
                             type="text"
                             name="name"
                             required
@@ -99,7 +99,7 @@ export default function Contact() {
                         className="inpemail outline-none border-none ml-2 mr-2  w-full">
                         <input
                             className={`placeholder-zinc-600 bg-transparent resize-none rounded-lg w-full p-2 border ${email ? "border-purple-500" : "border-zinc-700"
-                                } outline-none text-white text-lg mt-3`}
+                                } outline-none dark:text-white text-lg mt-3`}
 
                             type="email"
                             name="email"
@@ -128,7 +128,7 @@ export default function Contact() {
 
 
                         className={`placeholder-zinc-600 bg-transparent  resize-none rounded-lg w-full p-2  border ${text ? "border-purple-500" : "border-zinc-700"
-                            } outline-none text-white text-lg mt-3`}
+                            } outline-none dark:text-white text-lg mt-3`}
                         style={{ height: "auto", minHeight: "40px" }}
                         name="message"
                         placeholder="What is your Feedback?!"
@@ -177,7 +177,7 @@ export default function Contact() {
                         // viewport={{once:true,amount:0.5}}
 
                         type="submit"
-                        className="outline-none border text-white w-auto text-lg  border-zinc-600 rounded-md p-1 pl-5 pr-5 cursor-pointer transition-all duration-700 font-semibold select-none hover:bg-purple-700"
+                        className="outline-none border hover:text-white dark:text-white w-auto text-lg  border-zinc-600 rounded-md p-1 pl-5 pr-5 cursor-pointer transition-all duration-700 font-semibold select-none hover:bg-purple-700"
                     >
                         Submit
                     </motion.button>
