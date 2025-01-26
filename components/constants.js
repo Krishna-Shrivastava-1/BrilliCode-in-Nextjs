@@ -12,10 +12,12 @@ export const LANGUAGE_VERSIONS = {
     r: "4.2.3",
     ruby: "3.0.1", // Added Ruby
     go: "1.16.2",
-    kotlin:"1.8.20"
+    kotlin: "1.8.20",
+    jelly: "0.1.31", // Added Jelly
+    perl: "5.36.0", // Added Perl
+    dart: "2.19.6", // Added Dart
 };
 
-  
 export const CODE_SNIPPETS = {
     javascript: `\nfunction greet(name) {\n\tconsole.log("Hello, " + name + "!");\n}\n\ngreet("Krishna");\n`,
     typescript: `\ntype Params = {\n\tname: string;\n}\n\nfunction greet(data: Params) {\n\tconsole.log("Hello, " + data.name + "!");\n}\n\ngreet({ name: "Krishna" });\n`,
@@ -31,4 +33,7 @@ export const CODE_SNIPPETS = {
     ruby: `\ndef greet(name)\n\tputs "Hello, #{name}!"\nend\n\ngreet("Krishna")\n`,
     go: `package main\n\nimport "fmt"\n\nfunc main() {\n\tfmt.Println("Hello, World!")\n}\n`,
     kotlin: `fun main() {\n\tprintln("Hello, World!")\n}\n`,
+    jelly: `“Hello, World!”`, // Jelly uses implicit execution for simple strings
+    perl: `#!/usr/bin/perl\nprint "Hello, World!\\n";\n`, // Perl syntax for Hello World
+    dart: `void main() {\n\tprint('Hello, World!');\n}\n`, // Dart Hello World
 };

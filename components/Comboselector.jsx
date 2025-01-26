@@ -17,6 +17,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
+import Link from 'next/link';
 const languages = [
     { value: "javascript", label: "JavaScript" },
     { value: "typescript", label: "TypeScript" },
@@ -31,38 +32,42 @@ const languages = [
     // { value: "r", label: "R" },
     { value: "ruby", label: "Ruby" },
     { value: "go", label: "Go" },
-    {value:"kotlin",label:"Kotlin"}
+    { value: "kotlin", label: "Kotlin" },
+    { value: "perl", label: "Perl" },
+    { value: "jelly", label: "Jelly" },
+    { value: "dart", label: "Dart" },
+    { value: "html-css-js", label: "HTML-CSS-JS-Webpack" },
 ];
-const Comboselector = ({handlefunc,langu}) => {
-       const [language, setLanguage] = useState("javascript");
-        const [code, setCode] = useState(CODE_SNIPPETS[langu]); // Set initial code based on default language
-        const [output, setOutput] = useState(null);
-        const [isLoading, setIsLoading] = useState(false);
-        const [isError, setIsError] = useState(false);
-        const [open, setOpen] = useState(false); // State for Popover
-    
-        const handleLanguageChange = (newLanguage) => {
-            setLanguage(newLanguage); // Update the selected language
-            setCode(CODE_SNIPPETS[newLanguage]); // Set the starter code for the new language
-        };
-    
-        const runCode = async () => {
-            try {
-                setIsLoading(true);
-                const { run: result } = await executeCode(langu, code);
-                setOutput(result.output.split("\n")); // Store output as array of strings
-                result.stderr ? setIsError(true) : setIsError(false);
-            } catch (error) {
-                console.log(error);
-                setIsError(true);
-                setOutput(["An error occurred while executing the code."]);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-  return (
-    <div>
-         <Popover open={open} onOpenChange={setOpen}>
+const Comboselector = ({ handlefunc, langu }) => {
+    const [language, setLanguage] = useState("javascript");
+    const [code, setCode] = useState(CODE_SNIPPETS[langu]); // Set initial code based on default language
+    const [output, setOutput] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [open, setOpen] = useState(false); // State for Popover
+
+    const handleLanguageChange = (newLanguage) => {
+        setLanguage(newLanguage); // Update the selected language
+        setCode(CODE_SNIPPETS[newLanguage]); // Set the starter code for the new language
+    };
+
+    const runCode = async () => {
+        try {
+            setIsLoading(true);
+            const { run: result } = await executeCode(langu, code);
+            setOutput(result.output.split("\n")); // Store output as array of strings
+            result.stderr ? setIsError(true) : setIsError(false);
+        } catch (error) {
+            console.log(error);
+            setIsError(true);
+            setOutput(["An error occurred while executing the code."]);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    return (
+        <div>
+            <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button
                         variant="outline"
@@ -76,35 +81,42 @@ const Comboselector = ({handlefunc,langu}) => {
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-[200px] p-0">
+                <PopoverContent className="w-[200px] p-0 shadow-lg shadow-zinc-800">
                     <Command>
                         <CommandInput placeholder="Search language..." />
                         <CommandList>
                             <CommandEmpty>No language found.</CommandEmpty>
                             <CommandGroup>
+
                                 {languages.map((lang) => (
-                                    <CommandItem
-                                        key={lang.value}
-                                        onSelect={() => {
-                                            handlefunc(lang.value);
-                                            setOpen(false);
-                                        }}
-                                    >
-                                        <Check
-                                            className={`mr-2 h-4 w-4 ${
-                                                langu === lang.value ? "opacity-100" : "opacity-0"
-                                            }`}
-                                        />
-                                        {lang.label}
-                                    </CommandItem>
+                                    <Link key={lang.value} href={`/language/${lang.value}`}>
+                                        <CommandItem
+                                            key={lang.value}
+                                            onSelect={() => {
+                                                handlefunc(lang.value);
+                                                setOpen(false);
+                                            }}
+                                        >
+                                            <Check
+                                                className={`mr-2 h-4 w-4 ${langu === lang.value ? "opacity-100" : "opacity-0"
+                                                    }`}
+                                            />
+
+                                            {lang.label}
+
+
+
+                                        </CommandItem>
+                                    </Link>
                                 ))}
+
                             </CommandGroup>
                         </CommandList>
                     </Command>
                 </PopoverContent>
             </Popover>
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Comboselector

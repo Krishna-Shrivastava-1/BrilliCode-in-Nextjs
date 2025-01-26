@@ -14,8 +14,12 @@ import {
 const DarkmodeToggle = ({ ste }) => {
     const { theme, setTheme } = useTheme()
     React.useEffect(() => {
+
         ste(theme)
     }, [theme, ste])
+    if (theme === 'system') {
+        setTheme('dark')
+    }
     //    console.log(theme)
     return (
         <div>

@@ -21,9 +21,9 @@ export const executeCode = async (language, sourceCode) => {
 
 // import axios from "axios";
 
-const fetchRuntimes = async () => {
-  const response = await axios.get("https://emkc.org/api/v2/piston/runtimes");
-  console.log(response.data);
-};
+// const fetchRuntimes = async () => {
+//   const response = await axios.get("https://emkc.org/api/v2/piston/runtimes");
+//   console.log(response.data);
+// };
 
-fetchRuntimes();
+// fetchRuntimes();

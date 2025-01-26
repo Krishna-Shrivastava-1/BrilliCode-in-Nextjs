@@ -9,6 +9,7 @@
 }
 body {
   font-family: Arial, Helvetica, sans-serif;
+
 }
 
 @layer base {
@@ -74,4 +75,10 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+.textshad{
+  text-shadow: 0px 0px 30px white;
+}
+.textshlig{
+  text-shadow: 0px 0px 30px rgb(230, 6, 6);
 }

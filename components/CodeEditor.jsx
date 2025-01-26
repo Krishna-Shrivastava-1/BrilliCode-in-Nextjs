@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/drawer"
 import Navbar from './Navbar';
 import Comboselector from './Comboselector';
+import Footer from './Footer';
 
 // Dynamically import Monaco Editor
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false });
@@ -42,11 +43,14 @@ const languages = [
     // { value: "r", label: "R" },
     { value: "ruby", label: "Ruby" },
     { value: "go", label: "Go" },
-    
+    { value: "perl", label: "Perl" },
+    { value: "jelly", label: "Jelly" },
+    { value: "dart", label: "Dart" },
+
 ];
 
-const CodeEditor = () => {
-    const [language, setLanguage] = useState("javascript");
+const CodeEditor = ({ selectedlangi }) => {
+    const [language, setLanguage] = useState(selectedlangi || 'javascript');
     const [code, setCode] = useState(CODE_SNIPPETS[language]); // Set initial code based on default language
     const [output, setOutput] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -97,7 +101,7 @@ const CodeEditor = () => {
                     <Drawer>
                         <DrawerTrigger>
                             {/* Replace the inner Button with a div or span */}
-                          <h2 className='font-semibold select-none dark:bg-white dark:text-black px-4 rounded-md py-[2px] bg-[#171717] text-white'>Output</h2>
+                            <h2 className='font-semibold select-none dark:bg-white dark:text-black px-4 rounded-md py-[2px] bg-[#171717] text-white'>Output</h2>
                             {/* <Button className='font-bold select-none'></Button> */}
                             {/* <div className="font-bold cursor-pointer select-none">Output</div> */}
                         </DrawerTrigger>
@@ -161,7 +165,9 @@ const CodeEditor = () => {
                 </ResizablePanelGroup>
             </div>
 
-
+            <div className='w-full flex items-center justify-center'>
+                <Footer />
+            </div>
 
 
         </div>
