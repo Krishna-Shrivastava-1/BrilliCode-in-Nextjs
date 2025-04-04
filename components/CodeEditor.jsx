@@ -62,11 +62,38 @@ const CodeEditor = ({ selectedlangi }) => {
         setCode(CODE_SNIPPETS[newLanguage]); // Set the starter code for the new language
     };
 
+    // const runCode = async () => {
+    //     try {
+    //         setIsLoading(true);
+    //         const { run: result } = await executeCode(language, code);
+    //         setOutput(result.output.split("\n")); // Store output as array of strings
+    //         result.stderr ? setIsError(true) : setIsError(false);
+    //     } catch (error) {
+    //         console.log(error);
+    //         setIsError(true);
+    //         setOutput(["An error occurred while executing the code."]);
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
+
     const runCode = async () => {
         try {
             setIsLoading(true);
-            const { run: result } = await executeCode(language, code);
-            setOutput(result.output.split("\n")); // Store output as array of strings
+            let modifiedCode = code;
+    
+            // Check if the code includes input() for Python
+            if (language === 'python' && code.includes('input(') || code.includes("input(")) {
+                // Replace input() calls with a custom handler
+                const inputRegex = /input\((.*?)\)/g;
+                modifiedCode = code.replace(inputRegex, (_, promptText) => {
+                    const userInput = window.prompt(eval(promptText) || "Enter input:");
+                    return JSON.stringify(userInput); // Convert input to string for Python code
+                });
+            }
+    
+            const { run: result } = await executeCode(language, modifiedCode); // Execute modified code
+            setOutput(result.output.split("\n")); // Display the output
             result.stderr ? setIsError(true) : setIsError(false);
         } catch (error) {
             console.log(error);
@@ -76,6 +103,8 @@ const CodeEditor = ({ selectedlangi }) => {
             setIsLoading(false);
         }
     };
+    
+    
     // console.log(parent)
     return (
         <div>
